@@ -1,0 +1,1 @@
+model/summit_seeker_model_mountain.pth filter=lfs diff=lfs merge=lfs -text
