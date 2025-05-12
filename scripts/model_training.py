@@ -7,7 +7,7 @@
 # and you can choose the number of epochs performed between each checkpoint
 # by modifying the `SAVE_PERIOD` variable (5 by default).
 
-SAVE_PERIOD = 1
+SAVE_PERIOD = 5
 
 import os
 import torch
