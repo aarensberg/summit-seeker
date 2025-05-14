@@ -1,6 +1,0 @@
-ultralytics
-torch
-torchvision
-pathlib
-yaml
-torch.nn
