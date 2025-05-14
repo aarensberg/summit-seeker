@@ -40,7 +40,15 @@ pip install -r requirements.txt
 
 ## Usage
 
-Coming soon! The application is still in early development.
+Lauch image detection model and open path-finding interface :
+```bash
+python -m app.main <image_path>
+```
+
+options :
+- `--model` : Specify a different path for the YOLO model (default: [PACTEv3.pt](models/PACTEv3.pt))
+- `--show-detections` : Display raw detections before path calculation
+- `--conf` : Modify confidence threshold for detections (value between 0 and 1)
 
 ## Roadmap
 
@@ -49,7 +57,7 @@ Coming soon! The application is still in early development.
 - [x] Data augmentation
 - [x] Hold detection model
 - [x] Path-finding algorithm
-- [ ] User interface
+- [x] User interface (not perfect yet but functional)
 
 ## Data sources
 
@@ -57,10 +65,15 @@ Coming soon! The application is still in early development.
 
 The 4 datasets below were the original database we wanted to use. The problem is that we wanted to use an object detection model to detect holds on outdoor climbing routes. However, these datasets mainly contained images of indoor climbing boulders, which didn't suit our purpose. Nevertheless, we decided to try training a model on these data to increase the size of our dataset, which was insufficient.
 
-1. [어니러ㅣ너일 Computer Vision Project](https://universe.roboflow.com/foad-ad5491-gmail-com/climbing-dataset-ekl0f)
+1. [climbing-dataset Computer Vision Project](https://universe.roboflow.com/foad-ad5491-gmail-com/climbing-dataset-ekl0f)
 2. [cliving Computer Vision Project](https://universe.roboflow.com/kmw/cliving)
 3. [holds Computer Vision Project](https://universe.roboflow.com/mmm-jzxx1/holds-tptrk)
 4. [HoldSeg Computer Vision Project](https://universe.roboflow.com/ak2isa-lhgcw/holdseg)
+
+The dataset contains 8981 (64+810+7996+111) images:
+- 8196 (45+717+7335+99) training images
+- 292 (13+60+211+8) validation images
+- 493 (6+33+450+4) test images
 
 All datasets are publicly available. We have merged the data sources listed above into a single file to facilitate model training. You can access to the merged dataset from :
 
@@ -70,7 +83,12 @@ All datasets are publicly available. We have merged the data sources listed abov
 
 Since the model wasn't learning correctly on the block data, we decided to keep only the “Climbing dataset”, which contains images of outdoor climbing routes but very few of them. We therefore proceeded to increase the size of our dataset from 45 training images to 990. That's 22 augmented images per original image.
 
-1. [Climbing dataset](https://universe.roboflow.com/foad-ad5491-gmail-com/climbing-dataset-ekl0f)
+1. [climbing-dataset Computer Vision Project](https://universe.roboflow.com/foad-ad5491-gmail-com/climbing-dataset-ekl0f)
+
+The dataset contains 64 images:
+- 45 training images
+- 13 test images
+- 6 validation images
 
 [Google Drive](https://drive.google.com/drive/folders/1YGloMA9P_dI6gWHyFkJ2CocDKF1B4ihU?usp=sharing) : Cleaned version of the original dataset (removes duplicates, empty labels, etc.)
 
@@ -78,12 +96,22 @@ Since the model wasn't learning correctly on the block data, we decided to keep 
 
 ```plaintext
 summit-seeker/
+├── app/
+│   ├── __init__.py
+│   ├── hold_detector.py
+│   ├── main.py
+|   └── path_finder.py
 ├── data/
 │   └── "augmented_train/" or "test/" or "train/" or "valid/"
 |       ├── images/
 |       |   └── *.jpg
 |       └── labels/
 |           └── *.txt     --> YOLO format : <hold_class> <coord_1> <coord_2> <...> <coord_n>
+├── models/
+│   ├── 2025-05-09_13h46_yolo11n.pt
+│   ├── PACTEv1.pt
+│   ├── PACTEv2.pt
+|   └── PACTEv3.pt
 ├── notebooks/
 │   ├── data_augmentation.ipynb
 │   ├── data_cleaning.ipynb
@@ -98,10 +126,6 @@ summit-seeker/
 ```
 
 The `data/` directory is shown in the repository structure for illustration purposes but is not included in the repository due to size constraints. You can download the datasets directly the Google Drive links provided above.
-
-## Technologies Used
-
-- Python 3.11.9
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
