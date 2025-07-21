@@ -101,6 +101,8 @@ summit-seeker/
 │   ├── hold_detector.py
 │   ├── main.py
 |   └── path_finder.py
+├── climbing_hold_final_result_sample/
+│   └── *.jpg     --> Images of some detections, and loss curves
 ├── data/
 │   └── "augmented_train/" or "test/" or "train/" or "valid/"
 |       ├── images/
@@ -123,7 +125,6 @@ summit-seeker/
 ├── LICENSE
 ├── README.md
 └── requirements.txt
-```
 
 The `data/` directory is shown in the repository structure for illustration purposes but is not included in the repository due to size constraints. You can download the datasets directly the Google Drive links provided above.
 
