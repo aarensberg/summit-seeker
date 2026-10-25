@@ -1,10 +1,8 @@
 # hidden files (macos and github)
 .DS_Store
-.github/
 
 # compiled files used to run scripts
 __pycache__/
 
 # workspace folder you don't need
-data/
-models/*.png
+/data/
